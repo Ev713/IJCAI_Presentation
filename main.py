@@ -383,21 +383,23 @@ config3 = [
 config4 = [
     2, 2, 0, 0, 2, ((0, 0), (1, 0)), ()
 ]
-rows, cols, block_height, block_width, num_agents, agents, goals = config4
+
+config5 = [4, 4, 1, 1, 4, ((0, 1), (1, 3), (3, 2), (2, 0)), ((3, 1), (1, 0), (0, 2), (2, 3))]
+rows, cols, block_height, block_width, num_agents, agents, goals = config5
 # agents = [agents[0]]
 # goals = [goals[0]]
 # COLORS = COLORS[0]
-walls = [((1, 0), (1, 1))]
-blocks, intersections = generate_block_grid(rows, cols, block_height, block_width, spacing=1)
+#walls = [((1, 0), (1, 1))]
+blocks, intersections = generate_block_grid(rows, cols, block_height, block_width, spacing=2)
 # goals = generate_goals_for_agents(rows, cols, agents, blocks, intersections)
-#full_paths = [find_shortest_path(walls, agents[i], goals[i], blocks) for i in range(num_agents)]
-#paths = [full_paths[i] for i in range(num_agents)]
-paths = [(), ()]
-agents_ids = [i for i in range(num_agents)]
+full_paths = [find_shortest_path(walls, agents[i], goals[i], blocks) for i in range(num_agents)]
+paths = [full_paths[i] for i in range(num_agents)]
+#paths = []
+agents_ids = [3]#[i for i in range(num_agents)]
 
 #crushes = ((1, 1),)
 
 agents, paths, goals, colors = pick_ids(agents, agents_ids), pick_ids(paths, agents_ids), \
                                pick_ids(goals, agents_ids), pick_ids(COLORS, agents_ids)
 
-draw_maze(walls, agents, paths, goals, blocks, colors, cups=((0, 0), (1, 0)), berries=((1, 0),))
+draw_maze(walls, agents, paths, goals, blocks, colors)
